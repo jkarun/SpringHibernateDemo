@@ -23,9 +23,24 @@ public class UserServiceImpl implements UserService{
 	}
 
 	@Override
-	public List<User> getListOfUser() {
-		// TODO Auto-generated method stub
+	public User findById(int id) {
 		return null;
 	}
+
+	@Override
+	public void saveEmployee(User employee) {
+		
+	}
+
+	@Override
+	public void deleteEmployeeById(String id) {
+		
+	}
+
+	@Override
+	public List<User> findAllUser() {
+		return null;
+	}
+
 
 }

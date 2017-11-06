@@ -13,13 +13,10 @@ public class HomeController {
 	@Autowired
 	UserService userService;
 	
-	@RequestMapping("/")
+	@RequestMapping(value= {"/","/list"})
 	public String homePage() {
-		User user = new User();
-		user.setName("arun");
-		user.setSalary("10000");
-		user.setSsn("123456789");
-		userService.saveUser(user);
+		
+		
 		return "index";
 	}
 	
