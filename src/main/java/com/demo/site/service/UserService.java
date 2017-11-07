@@ -7,11 +7,11 @@ import com.demo.site.model.User;
 public interface UserService {
 	User findById(int id);
 
-	void saveEmployee(User employee);
-
-	void deleteEmployeeById(String id);
+	void deleteUserById(int id);
 
 	List<User> findAllUser();
 
 	void saveUser(User user);
+
+	void updateUser(User user);
 }

@@ -2,11 +2,9 @@ package com.demo.site.DAO;
 
 import java.util.List;
 
-
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.criterion.CriteriaQuery;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -27,7 +25,7 @@ public class UserDAOImpl implements UserDAO{
 		try {
 			Session session = this.getSession();
 			session.beginTransaction();
-			session.persist(user);
+			session.save(user);
 			session.getTransaction().commit();
 			session.close();
 		} catch (Exception e) {
@@ -48,7 +46,7 @@ public class UserDAOImpl implements UserDAO{
 	}
 
 	@Override
-	public void deleteUserBySsn(int id) {
+	public void deleteUserById(int id) {
 		Query query = getSession().createQuery("delete from User where id= :id");
 		query.setInteger("id", id);
 		query.executeUpdate();
@@ -56,9 +54,25 @@ public class UserDAOImpl implements UserDAO{
 
 	@Override
 	public List<User> findAllUser() {
-		CriteriaQuery c = (CriteriaQuery) getSession().createCriteria(User.class);
-		List<User> users = null;
-		return null;
+		Query q = getSession().createQuery("from User");
+		List<User> users = q.list();
+		return users;
+	}
+
+	@Override
+	public void updateUser(User user) {
+		User update = this.findById(user.getId());
+		if(update != null) {
+			update.setName(user.getName());
+			update.setSalary(user.getSalary());
+			update.setSsn(user.getSsn());
+			
+			Session session = this.getSession();
+			session.beginTransaction();
+			session.update(update);
+			session.getTransaction().commit();
+			session.close();
+		}
 	}
 
 
